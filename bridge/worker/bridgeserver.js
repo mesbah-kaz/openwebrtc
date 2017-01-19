@@ -69,7 +69,7 @@ extensionServer.onaccept = function (event) {
     }
 };
 
-var server = new WebSocketServer(10817, "https://127.0.0.1");
+var server = new WebSocketServer(10717, "127.0.0.1");
 server.onaccept = function (event) {
     var ws = event.socket;
     var origin = event.origin;
