@@ -56,8 +56,8 @@ function WebSocket() {
             "type": gio.SocketType.STREAM,
             "protocol": gio.SocketProtocol.TCP
         });
-        socketClient.connect_to_host_async(hostAndPort, 80, null, connectCallback);
         socketClient.set_tls(true);
+        socketClient.connect_to_host_async(hostAndPort, 80, null, connectCallback);
         readyState = state.CONNECTING;
     } else {
         // dispatched from server socket
