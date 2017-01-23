@@ -56,7 +56,6 @@ function WebSocket() {
             "type": gio.SocketType.STREAM,
             "protocol": gio.SocketProtocol.TCP
         });
-        socketClient.set_tls(true);
         socketClient.connect_to_host_async(hostAndPort, 80, null, connectCallback);
         readyState = state.CONNECTING;
     } else {
@@ -339,6 +338,27 @@ function WebSocket() {
     };
 };
 
+function certificatePath (fileName)
+{
+    var cwd = g_get_current_dir ();
+    var path = g_build_filename ("/cert", fileName, NULL);;
+    var abs = g_build_filename (cwd, path, NULL);
+
+//    if (!g_path_is_absolute (path))
+//    {
+//        gchar *cwd, *abs;
+//        
+//        g_free (cwd);
+//        g_free (path);
+//        path = abs;
+//    }
+//    
+//    const_path = g_intern_string (path);
+//    g_free (path);
+    return path;
+}
+
+
 function WebSocketServer(port, bindAddress) {
     if (!bindAddress)
         bindAddress = "0.0.0.0";
@@ -346,6 +366,9 @@ function WebSocketServer(port, bindAddress) {
     var _this = this;
     var prio = glib.PRIORITY_DEFAULT;
     var socketService = new gio.SocketService();
+    
+    var cert = g_tls_certificate_new_from_file (certificatePath ("server-and-key.pem"));
+    
     socketService.add_address(new gio.InetSocketAddress({
         "address": new gio.InetAddress.from_string(bindAddress),
         "port": port
