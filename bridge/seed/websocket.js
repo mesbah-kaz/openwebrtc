@@ -344,8 +344,8 @@ function certificatePath (fileName)
     
 //    GLib.filename_to_uri (GLib.get_current_dir() + "/hellognome.html", null);
     
-    var path = glib.build_filename ("/cert", fileName, null);
-    var abs = glib.build_filename (cwd, path, null);
+    var path = glib.build_filenamev("/cert", fileName, null);
+    var abs = glib.build_filenamev(cwd, path, null);
 
 //    if (!g_path_is_absolute (path))
 //    {
