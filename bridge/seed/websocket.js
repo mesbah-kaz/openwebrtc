@@ -341,8 +341,8 @@ function WebSocket() {
 function certificatePath (fileName)
 {
     var cwd = glib.get_current_dir();
-    var path = glib.build_filename ("/cert", fileName, NULL);;
-    var abs = glib.build_filename (cwd, path, NULL);
+    var path = glib.build_filename ("/cert", fileName);
+    var abs = glib.build_filename (cwd, path);
 
 //    if (!g_path_is_absolute (path))
 //    {
