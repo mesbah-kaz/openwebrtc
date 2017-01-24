@@ -340,9 +340,9 @@ function WebSocket() {
 
 function certificatePath (fileName)
 {
-    var cwd = g_get_current_dir ();
-    var path = g_build_filename ("/cert", fileName, NULL);;
-    var abs = g_build_filename (cwd, path, NULL);
+    var cwd = GLib.get_current_dir();
+    var path = GLib.build_filename ("/cert", fileName, NULL);;
+    var abs = GLib.build_filename (cwd, path, NULL);
 
 //    if (!g_path_is_absolute (path))
 //    {
@@ -367,7 +367,8 @@ function WebSocketServer(port, bindAddress) {
     var prio = glib.PRIORITY_DEFAULT;
     var socketService = new gio.SocketService();
     
-    var cert = g_tls_certificate_new_from_file (certificatePath ("server-and-key.pem"));
+    var certPath = certificatePath ("server-and-key.pem");
+    var cert = Gio.TlsCertificate.new_from_file(certPath);
     
     socketService.add_address(new gio.InetSocketAddress({
         "address": new gio.InetAddress.from_string(bindAddress),
