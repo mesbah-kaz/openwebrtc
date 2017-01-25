@@ -338,29 +338,6 @@ function WebSocket() {
     };
 };
 
-function certificatePath (fileName)
-{
-    var cwd = glib.get_current_dir();
-    
-//    GLib.filename_to_uri (GLib.get_current_dir() + "/hellognome.html", null);
-    
-    var abs = glib.build_filenamev([cwd, "cert", fileName, null]);
-
-//    if (!g_path_is_absolute (path))
-//    {
-//        gchar *cwd, *abs;
-//        
-//        g_free (cwd);
-//        g_free (path);
-//        path = abs;
-//    }
-//    
-//    const_path = g_intern_string (path);
-//    g_free (path);
-    return abs;
-}
-
-
 function WebSocketServer(port, bindAddress) {
     if (!bindAddress)
         bindAddress = "0.0.0.0";
@@ -369,7 +346,7 @@ function WebSocketServer(port, bindAddress) {
     var prio = glib.PRIORITY_DEFAULT;
     var socketService = new gio.SocketService();
     
-    var certPath = certificatePath ("server-and-key.pem");
+    var certPath = "~/TestCert/server-and-key.pem";
     var cert = gio.TlsCertificate.new_from_file(certPath);
     
     
