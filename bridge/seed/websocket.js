@@ -347,7 +347,7 @@ function WebSocketServer(port, bindAddress) {
     var socketService = new gio.SocketService();
     
     var certPath = "~/TestCert/server-and-key.pem";
-    var cert = gio.TlsCertificate.from_file(certPath);    
+    var cert = new gio.TlsCertificate.from_file(certPath);    
     
     socketService.add_address(new gio.InetSocketAddress({
         "address": new gio.InetAddress.from_string(bindAddress),
