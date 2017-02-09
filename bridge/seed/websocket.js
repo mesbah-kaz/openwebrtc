@@ -440,6 +440,7 @@ function WebSocketServer(port, bindAddress) {
 
         var response =  "HTTP/1.1 101 Switching Protocols\r\n" +
                         "Upgrade: websocket\r\n" +
+                        "Access-Control-Allow-Origin: *\r\n" +
                         "Connection: Upgrade\r\n" +
                         (serverProtocol ? "Sec-WebSocket-Protocol: " +
                             serverProtocol + "\r\n" : "") +
