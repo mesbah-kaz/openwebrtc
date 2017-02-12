@@ -262,6 +262,12 @@ void owr_image_server_remove_image_renderer(OwrImageServer *image_server, const 
 "Access-Control-Allow-Origin: %s\r\n" \
 "\r\n"
 
+static gboolean on_accept_certificate (GTlsClientConnection *conn, GTlsCertificate *cert,
+                       GTlsCertificateFlags errors, gpointer user_data)
+{
+    return errors == G_TLS_CERTIFICATE_UNKNOWN_CA;
+}
+
 static gboolean on_incoming_connection(GThreadedSocketService *service,
     GSocketConnection *connection, GObject *source_object, OwrImageServer *image_server)
 {
@@ -292,21 +298,10 @@ static gboolean on_incoming_connection(GThreadedSocketService *service,
     g_assert_no_error (error);
     g_object_unref (cert);
     
-/*
-    g_object_set (test->server_connection, "authentication-mode", test->auth_mode, NULL);
-    g_signal_connect (test->server_connection, "accept-certificate",
-                      G_CALLBACK (on_accept_certificate), test);
+    g_object_set (server_connection, "authentication-mode", G_TLS_AUTHENTICATION_NONE, NULL);
     
-    if (test->database)
-        g_tls_connection_set_database (G_TLS_CONNECTION (test->server_connection), test->database);
+    g_signal_connect (server_connection, "accept-certificate", G_CALLBACK(on_accept_certificate), NULL);
     
-    stream = g_io_stream_get_output_stream (test->server_connection);
-    
-    g_output_stream_write_async (stream, TEST_DATA,
-                                 test->rehandshake ? TEST_DATA_LENGTH / 2 : TEST_DATA_LENGTH,
-                                 G_PRIORITY_DEFAULT, NULL,
-                                 on_output_write_finish, test);
-  */
     bos = g_buffered_output_stream_new(g_io_stream_get_output_stream(G_IO_STREAM(server_connection)));
     dis = g_data_input_stream_new(g_io_stream_get_input_stream(G_IO_STREAM(server_connection)));
     g_data_input_stream_set_newline_type(dis, G_DATA_STREAM_NEWLINE_TYPE_CR_LF);
