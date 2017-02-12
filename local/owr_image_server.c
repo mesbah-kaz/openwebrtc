@@ -265,6 +265,10 @@ void owr_image_server_remove_image_renderer(OwrImageServer *image_server, const 
 static gboolean on_accept_certificate (GTlsClientConnection *conn, GTlsCertificate *cert,
                        GTlsCertificateFlags errors, gpointer user_data)
 {
+    GIOStream *testConn = conn;
+    GTlsCertificate *testCert = cert;
+    gpointer testUserData = user_data;
+    
     return errors == G_TLS_CERTIFICATE_UNKNOWN_CA;
 }
 
