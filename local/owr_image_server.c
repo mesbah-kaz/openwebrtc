@@ -262,9 +262,12 @@ void owr_image_server_remove_image_renderer(OwrImageServer *image_server, const 
 "Access-Control-Allow-Origin: %s\r\n" \
 "\r\n"
 
-static gboolean on_accept_certificate ()
+static gboolean on_accept_certificate (GTlsClientConnection *conn, GTlsCertificate *cert, GTlsCertificateFlags errors, gpointer user_data)
 {
-    return TRUE;
+    OWR_UNUSED(conn);
+    OWR_UNUSED(cert);
+    OWR_UNUSED(user_data);
+    return errors == G_TLS_CERTIFICATE_UNKNOWN_CA;
 }
 
 static gboolean on_incoming_connection(GThreadedSocketService *service,
