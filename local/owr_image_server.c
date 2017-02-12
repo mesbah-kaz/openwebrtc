@@ -281,8 +281,18 @@ static gboolean on_incoming_connection(GThreadedSocketService *service,
 
     g_return_val_if_fail(OWR_IS_IMAGE_SERVER(image_server), TRUE);
 
-    bos = g_buffered_output_stream_new(g_io_stream_get_output_stream(G_IO_STREAM(connection)));
-    dis = g_data_input_stream_new(g_io_stream_get_input_stream(G_IO_STREAM(connection)));
+    GTlsCertificate *cert;
+    GError *error = NULL;
+    cert = g_tls_certificate_new_from_file ("/cert/server-and-key.pem"), &error);
+    g_assert_no_error (error);
+    
+    GIOStream *server_connection;
+    server_connection = g_tls_server_connection_new (G_IO_STREAM (connection),
+                                                           cert, &error);
+    
+    
+    bos = g_buffered_output_stream_new(g_io_stream_get_output_stream(G_IO_STREAM(server_connection)));
+    dis = g_data_input_stream_new(g_io_stream_get_input_stream(G_IO_STREAM(server_connection)));
     g_data_input_stream_set_newline_type(dis, G_DATA_STREAM_NEWLINE_TYPE_CR_LF);
 
     error_body = "404 Not Found";
