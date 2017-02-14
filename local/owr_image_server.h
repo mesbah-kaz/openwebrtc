@@ -58,9 +58,10 @@ struct _OwrImageServerClass {
     GObjectClass parent_class;
 };
 
-static gchar *certificate_path;
 
 GType owr_image_server_get_type(void) G_GNUC_CONST;
+
+void owr_set_certificate_path(gchar *certPath);
 
 OwrImageServer *owr_image_server_new(guint port);
 

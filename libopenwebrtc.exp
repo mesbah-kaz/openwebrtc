@@ -3847,3 +3847,4 @@ glib_micro_version
 glib_minor_version
 glib_on_error_halt
 glib_pgettext
+owr_set_certificate_path

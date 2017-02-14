@@ -58,6 +58,7 @@ enum {
 };
 
 static GParamSpec *obj_properties[N_PROPERTIES] = {NULL, };
+static gchar *certificate_path;
 
 static void owr_image_server_set_property(GObject *object, guint property_id,
     const GValue *value, GParamSpec *pspec);
@@ -77,6 +78,11 @@ struct _OwrImageServerPrivate {
     GSocketService *socket_service;
     gboolean socket_service_is_started;
 };
+
+void owr_set_certificate_path(gchar *certPath)
+{
+    certificate_path = certPath;
+}
 
 static void owr_image_server_finalize(GObject *object)
 {
