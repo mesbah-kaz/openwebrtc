@@ -291,7 +291,8 @@ static gboolean on_incoming_connection(GThreadedSocketService *service,
 
     GTlsCertificate *cert;
     GError *error = NULL;
-    cert = g_tls_certificate_new_from_file ("/cert/server-and-key.pem", &error);
+    //cert = g_tls_certificate_new_from_file ("/cert/server-and-key.pem", &error);
+    cert = g_tls_certificate_new_from_file (certificate_path, &error);
     g_assert_no_error (error);
     
     GIOStream *server_connection;

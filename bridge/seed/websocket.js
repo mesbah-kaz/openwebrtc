@@ -346,8 +346,6 @@ function WebSocketServer(port, bindAddress) {
     var prio = glib.PRIORITY_DEFAULT;
     var socketService = new gio.SocketService();
        
-   var cert = "test";
-    
     socketService.add_address(new gio.InetSocketAddress({
         "address": new gio.InetAddress.from_string(bindAddress),
         "port": port
