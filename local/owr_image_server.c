@@ -59,7 +59,7 @@ enum {
 };
 
 static GParamSpec *obj_properties[N_PROPERTIES] = {NULL, };
-char *certificate_path;
+static char *certificate_path;
 
 static void owr_image_server_set_property(GObject *object, guint property_id,
     const GValue *value, GParamSpec *pspec);
@@ -82,9 +82,9 @@ struct _OwrImageServerPrivate {
 
 void owr_set_certificate_path(char *certPath)
 {
-    printf("certPath :%s", certPath);
+    printf("certPath :%s\n\n", certPath);
     certificate_path = certPath;
-    printf("certificate_path :%s", certificate_path);
+    printf("certificate_path :%s\n\n", certificate_path);
 }
 
 static void owr_image_server_finalize(GObject *object)
@@ -301,6 +301,7 @@ static gboolean on_incoming_connection(GThreadedSocketService *service,
     GTlsCertificate *cert;
     GError *error = NULL;
     //cert = g_tls_certificate_new_from_file ("/cert/server-and-key.pem", &error);
+    printf("certificate_path :%s\n\n", certificate_path);
     cert = g_tls_certificate_new_from_file (certificate_path, &error);
     g_assert_no_error (error);
     
