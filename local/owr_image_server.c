@@ -39,6 +39,7 @@
 
 #include <gio/gio.h>
 #include <string.h>
+#include <stdio.h>
 
 GST_DEBUG_CATEGORY_EXTERN(_owrimageserver_debug);
 #define GST_CAT_DEFAULT _owrimageserver_debug
@@ -58,7 +59,7 @@ enum {
 };
 
 static GParamSpec *obj_properties[N_PROPERTIES] = {NULL, };
-static gchar *certificate_path;
+char *certificate_path;
 
 static void owr_image_server_set_property(GObject *object, guint property_id,
     const GValue *value, GParamSpec *pspec);
@@ -79,9 +80,11 @@ struct _OwrImageServerPrivate {
     gboolean socket_service_is_started;
 };
 
-void owr_set_certificate_path(gchar *certPath)
+void owr_set_certificate_path(char *certPath)
 {
+    printf("certPath :%s", certPath);
     certificate_path = certPath;
+    printf("certificate_path :%s", certificate_path);
 }
 
 static void owr_image_server_finalize(GObject *object)
