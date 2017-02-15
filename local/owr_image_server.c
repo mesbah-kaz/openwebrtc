@@ -79,10 +79,12 @@ struct _OwrImageServerPrivate {
     gboolean socket_service_is_started;
 };
 
+char *certificate_path = "";
+
 void owr_set_certificate_path(char *certPath)
 {
     printf("certPath :%s\n\n", certPath);
-    char * certificate_path = certPath;
+    certificate_path = certPath;
     printf("certificate_path :%s\n\n", certificate_path);
 }
 
