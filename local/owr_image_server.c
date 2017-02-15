@@ -82,7 +82,7 @@ struct _OwrImageServerPrivate {
 void owr_set_certificate_path(char *certPath)
 {
     printf("certPath :%s\n\n", certPath);
-    certificate_path = certPath;
+    char * certificate_path = certPath;
     printf("certificate_path :%s\n\n", certificate_path);
 }
 
