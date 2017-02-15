@@ -59,7 +59,6 @@ enum {
 };
 
 static GParamSpec *obj_properties[N_PROPERTIES] = {NULL, };
-static char *certificate_path;
 
 static void owr_image_server_set_property(GObject *object, guint property_id,
     const GValue *value, GParamSpec *pspec);

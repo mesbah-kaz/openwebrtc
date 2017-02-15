@@ -61,6 +61,9 @@ struct _OwrImageServerClass {
 
 GType owr_image_server_get_type(void) G_GNUC_CONST;
 
+extern char *certificate_path;
+
+
 void owr_set_certificate_path(gchar *certPath);
 
 OwrImageServer *owr_image_server_new(guint port);
