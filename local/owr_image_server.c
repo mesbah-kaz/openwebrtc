@@ -299,7 +299,7 @@ static gboolean on_incoming_connection(GThreadedSocketService *service,
 
     g_return_val_if_fail(OWR_IS_IMAGE_SERVER(image_server), TRUE);
 
-    GTlsCertificate *cert;
+/*    GTlsCertificate *cert;
     GError *error = NULL;
     //cert = g_tls_certificate_new_from_file ("/cert/server-and-key.pem", &error);
     printf("certificate_path :%s\n\n", certificate_path);
@@ -314,10 +314,10 @@ static gboolean on_incoming_connection(GThreadedSocketService *service,
     
     g_object_set (server_connection, "authentication-mode", G_TLS_AUTHENTICATION_NONE, NULL);
     
-    g_signal_connect (server_connection, "accept-certificate", G_CALLBACK(on_accept_certificate), NULL);
+    g_signal_connect (server_connection, "accept-certificate", G_CALLBACK(on_accept_certificate), NULL);*/
     
-    bos = g_buffered_output_stream_new(g_io_stream_get_output_stream(G_IO_STREAM(server_connection)));
-    dis = g_data_input_stream_new(g_io_stream_get_input_stream(G_IO_STREAM(server_connection)));
+    bos = g_buffered_output_stream_new(g_io_stream_get_output_stream(G_IO_STREAM(connection)));
+    dis = g_data_input_stream_new(g_io_stream_get_input_stream(G_IO_STREAM(connection)));
     g_data_input_stream_set_newline_type(dis, G_DATA_STREAM_NEWLINE_TYPE_CR_LF);
 
     error_body = "404 Not Found";
