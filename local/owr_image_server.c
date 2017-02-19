@@ -379,7 +379,7 @@ static gboolean on_incoming_connection(GThreadedSocketService *service,
             content_length = image_data_size;
             g_free(response_header);
             response_header = g_strdup_printf(HTTP_RESPONSE_HEADER_TEMPLATE, 200, "OK",
-                                              "image/bmp", content_length,  "*");//image_server->priv->allow_origin);
+                                              "image/bmp", content_length, image_server->priv->allow_origin);
             g_buffered_output_stream_set_buffer_size(G_BUFFERED_OUTPUT_STREAM(bos),
                 strlen(response_header) + content_length);
         }
